@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Correction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_loading.css') }}">
+</head>
+
+<body>
+    <h1>Essay Correction</h1>
+
+    <div id="sidebar">
+        {% include 'back_index.html' %}
+    </div>
+    <div id="loading-indicator" class="popup">
+        <div class="popup-content">
+            <div class="u-loading">
+                <div class="u-loading__symbol">
+                    <img src="../static/back/img/Logo_A2SV.svg">
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- Form for image upload -->
+    <form action="/ocr" method="post" enctype="multipart/form-data" id="my-form">
+        <label for="image">Upload a handwritten paragraph image:</label>
+        <label class="btn display-inline">
+            Select Or Drop An Image
+            <input type="file" name="image" @change="onChange" accept="image/*" required>
+        </label>
+        <label for="num_lines">Number of Lines:</label>
+        <input type="number" name="num_lines" placeholder="Number of Lines" required>
+        <input type="submit" class="btn btn-primary" value="Start">
+    </form>
+    {% if user_input %}
+    <div class="user-input">
+        <p><strong>Your Question:</strong></p>
+        <p>{{ user_input }}</p>
+    </div>
+    {% endif %}
+
+    {% if result %}
+    <div class="response">
+        <p><strong>Assistant's Reply:</strong></p>
+        <p>{{ result }}</p>
+
+    </div>
+    {% endif %}
+
+    {% if generated_text %}
+    <div class="ocr-response">
+        <p><strong>OCR Generated Text:</strong></p>
+        <p>{{ generated_text }}</p>
+    </div>
+    {% endif %}
+
+    {% if corrected_text %}
+    <div class="corrected-text">
+        <p><strong>Corrected Text:</strong></p>
+        <p>{{ corrected_text }}</p>
+    </div>
+    {% endif %}
+    
+    <script src="{{ url_for('static', filename='back/js/drag_and_drop.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const form = document.getElementById("my-form");
+        const loadingIndicator = document.getElementById("loading-indicator");
+    
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loadingIndicator.style.display = "block";
+            form.submit();
+        });
+    </script>
+</body>
+</html>

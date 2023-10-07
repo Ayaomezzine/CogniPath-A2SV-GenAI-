@@ -1,0 +1,186 @@
+/* style.css */
+.quiz-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+.options-container-left {
+  margin-left: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+.option {
+    margin: 5px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 400px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.option:hover {
+    background-color: #12893e;
+    color: white;
+}
+
+.selected {
+    background-color: #2ecc71;
+    color: white;
+    border: 2px solid;
+}
+
+/* Style the anchor element as a button */
+#submit-button {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+#submit-button img {
+    width: 100px; /* Adjust the size of the icon */
+    height: 100x; /* Adjust the size of the icon */
+    vertical-align: middle;
+    margin-right: 5px; /* Add some spacing between the icon and text */
+}
+
+#submit-button:hover {
+    background-color: #75e7a5; /* Change background color on hover */
+    color: white;
+    
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour assombrir la page */
+    z-index: 999; /* Assure que la fenêtre contextuelle est au-dessus des autres éléments */
+    text-align: center;
+  }
+  
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .u-loading {
+    width: 128px;
+    height: 128px;
+    display: block;
+    margin: 48px;
+  }
+  
+  .u-loading__symbol {
+    background-color: #4caf50;
+    padding: 8px;
+    animation: loading 3s infinite;
+    border-radius: 5px;
+  }
+  
+  .u-loading__symbol img {
+    display: block;
+    max-width: 100%;
+    animation: loading-icon 3s infinite;
+  }
+  
+  @keyframes loading {
+    0% {
+      transform: perspective(250px) rotateX(0deg) rotateY(0deg);
+    }
+    15% {
+      background-color: #4caf50;
+    }
+    16% {
+      background-color: #b44646;
+    }
+    50% {
+      transform: perspective(250px) rotateX(180deg) rotateY(0deg);
+      background-color: #b44646;
+    }
+    65% {
+      background-color: #b44646;
+    }
+    66% {
+      background-color: #4caf50;
+    }
+    100% {
+      transform: perspective(250px) rotateX(180deg) rotateY(-180deg);
+    }
+  }
+  @keyframes loading-icon {
+    0% {
+      transform: perspective(250px) rotateX(0deg) rotateY(0deg);
+    }
+    15% {
+      transform: perspective(250px) rotateX(0deg) rotateY(0deg);
+    }
+    16% {
+      transform: perspective(250px) rotateX(180deg) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(250px) rotateX(180deg) rotateY(0deg);
+    }
+    65% {
+      transform: perspective(250px) rotateX(180deg) rotateY(0deg);
+    }
+    66% {
+      transform: perspective(250px) rotateX(180deg) rotateY(180deg);
+    }
+    100% {
+      transform: perspective(250px) rotateX(180deg) rotateY(180deg);
+    }
+  }
+  /* .generated-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #333;
+  } */
+  .generated-image {
+    perspective: 500px;
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    text-align: center; /* Centrer le contenu horizontalement */
+  }
+  .image img {
+    max-width: 30%;
+    display: block; /* Assurez-vous que l'image est un élément de bloc */
+    margin: 0 auto; /* Centrer l'image horizontalement */
+    transform: rotateX(70deg) rotateZ(-60deg) translate3d(-120px, 0px, 70px);
+    box-shadow: -80px 60px 15px 5px rgba(0,0,0,0.4);
+    transition: all .4s;
+    transform-style: preserve-3d;
+    margin-left: 750px;
+  }
+  .image:hover img {
+    max-width: 30%;
+    transform: rotateX(0deg) rotateZ(0deg) translate3d(0px, 0px, 0px);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
+  }
+

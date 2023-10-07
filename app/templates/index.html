@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.88.1">
+<title>Welcome to COGNIPATH</title>
+
+<!-- CSS only -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/assets/css/custom.css">
+
+<style>
+    /* Custom CSS to style 'COGNIPATH' and the Login button */
+    .cognipath-text {
+        color: lightgreen;
+    }
+
+    .login-button {
+        background-color: lightgreen;
+        border-color: lightgreen;
+    }
+</style>
+
+</head>
+<body>
+
+<main>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold cognipath-text">WELCOME TO COGNIPATH</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+                Cut-down Version: Our AI-driven learning platform focuses on providing equitable education for students with mental disorders. We prioritize user collaboration, data privacy, and security to enhance the learning environment for all students, regardless of cognitive abilities.
+            </p>
+
+            {% if current_user.is_authenticated %}
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    Your credentials: {{ current_user.email }}
+                </div>
+            {% endif %}
+
+            <br />
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                {% if current_user.is_authenticated %} 
+                    <a href="/homepage" type="button" class="btn btn-primary btn-lg px-4 gap-3 login-button">Homepage</a>
+                    <a href="/logout" type="button" class="btn btn-primary btn-lg px-4 gap-3 login-button">Logout</a>
+                {% else %}
+                    <a href="/auth" type="button" class="btn btn-primary btn-lg px-4 gap-3 login-button">Login</a>
+                    <a href="/auth" type="button" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

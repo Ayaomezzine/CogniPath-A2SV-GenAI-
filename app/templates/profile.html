@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+
+<title>profile edit data and skills - Bootdey.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='back/css/profile.css') }}">
+</head>
+<body>
+    <div id="sidebar" >
+        {% include 'back_index.html' %}
+    </div>
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            <!-- [ Main Content ] start -->
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Edit Info</h5>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputUsername">Username</label>
+                                                        <input class="form-control" id="exampleInputUsername" readonly 
+                                                               value="{{ current_user.user }}"
+                                                               aria-describedby="userHelp" placeholder="Enter email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label {% if not current_user.email %} class="text-danger" {% endif %} 
+                                                               for="exampleInputEmail1">Email address</label>
+                                                        <input type="email"
+                                                               {% if current_user.email %} readonly value="{{ current_user.email }}" {% endif %}  
+                                                               class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                        {% if not current_user.email %}       
+                                                            <small id="emailHelp" class="form-text text-danger">
+                                                                You don't have an email address associated with this account.
+                                                            </small>
+                                                        {% endif %}    
+                                                    </div>
+                                                </div>                                                
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="fn">First Name</label>
+                                                        <input type="email" class="form-control" id="fn" aria-describedby="emailHelp" placeholder="Your name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="ln">Last Name</label>
+                                                        <input type="email" class="form-control" id="ln" aria-describedby="emailHelp" placeholder="Your last name">
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-sm-12 mb-4">
+                                                    <div class="form-group">
+                                                        <label for="abt">About Info</label>
+                                                        <textarea type="email" class="form-control" id="abt" aria-describedby="emailHelp" placeholder="Bio"></textarea>
+                                                        <small id="abf" class="form-text text-muted">We'll show this on your profile.</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 mb-2">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>

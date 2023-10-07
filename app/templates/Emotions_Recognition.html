@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autistic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/magic.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/typing.css') }}">
+    
+
+  
+  
+</head>
+<body>
+    <div id="sidebar">
+        {% include './back_index.html' %}
+      </div>
+    <div id="loading-indicator" class="popup">
+        <div class="popup-content">
+            <div class="u-loading">
+                <div class="u-loading__symbol">
+                    <img src="../static/back/img/Logo_A2SV.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/generate" method="post" id="my-form">
+        <div class="quiz-container">
+            <div class="options-container-left">
+                <div class="options">
+                    <div class="option" id="left-option-1">A Happy boy wearing a hat</div>
+                    <div class="option" id="left-option-2">An Angry girl wearing red dress</div>
+                </div>
+            </div>
+            <button id="submit-button" type="submit"><img src="{{ url_for('static', filename='back/img/magic-wand.gif') }}" alt=""></button>
+            <div class="options-container">
+                <div class="options">
+                    <div class="option" id="right-option-1">Surprised child </div>
+                    <div class="option" id="right-option-2">Sad woman watching her phone</div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="selected-choice" name="choice" value="">
+    </form>
+
+    {% if image_filename %}
+    <div class="wrapper">
+        <div class="typing-demo" id="dynamic-text">This is a dynamically sized paragraph. It can be longer or shorter.</div>
+    </div>
+            <div class="image">
+              <img src="{{ url_for('static', filename='aa.jfif') }}" class="img" alt="hiii i am z">
+            </div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='back/js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='back/js/typing.js') }}"></script>
+</body>
+</html>
