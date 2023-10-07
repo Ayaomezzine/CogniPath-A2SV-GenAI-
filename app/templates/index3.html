@@ -15,8 +15,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet"> <!-- New Font -->
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/static/front/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -46,7 +46,7 @@
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
             <a href="index.html" class="navbar-brand">
-                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>COGNIPATH</h1>
+                <h1 class="m-0 text-primary"><i class="fa fa-book-reader me-3"></i>CogniPath</h1>
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -63,7 +63,7 @@
                             <a href="facility.html" class="dropdown-item">Quiz</a>
                         </div>
                     </div>
-                    <a href="about.html" class="nav-item nav-link">About Us</a>
+                    <a href="#about_div" class="nav-item nav-link">About Us</a>
                     <a href="#contact_div" class="nav-item nav-link">Contact Us</a>
                 </div>
                 {% if current_user.is_authenticated %} 
@@ -82,12 +82,12 @@
         <div class="container-fluid p-0 mb-5">
             <div class="owl-carousel header-carousel position-relative">
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="static/front/img/home.png" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(0, 0, 0, .2);">
+                    <img class="img-fluid" src="static/front/img/Home2.svg" alt="">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" >
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-10 col-lg-8">
-                                    <h1 class="display-2 text-white animated slideInDown mb-4">Comprehending Your Child's Learning Profile for an Enhanced Educational Journey</h1>
+                                    <h1 class="display-2 text-white animated slideInDown mb-4"></h1>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="owl-carousel-item position-relative">
                     <img class="img-fluid" src="static/front/img/img_gen5.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(0, 0, 0, .2);">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-10 col-lg-8">
@@ -108,7 +108,7 @@
                 </div>
                 <div class="owl-carousel-item position-relative">
                     <img class="img-fluid" src="static/front/img/img_gen8.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(0, 0, 0, .2);">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" >
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-10 col-lg-8">
@@ -153,7 +153,7 @@
                                 <i class="fa fa-home fa-3x text-warning"></i>
                                 <span class="bg-warning"></span>
                             </div>
-                            <div class="facility-text bg-warning">
+                            <div class="facility-text bg-warning"><a href="#">
                                 <h3 class="text-warning mb-3">Dyslexia</h3>
                                 <p class="mb-0">Dyslexia is the 🌟 most common neurodivergence, and while it is widely recognized, it primarily affects someone's ability to read or write accurately. 📚🧠🤝</p>
                             </a>
@@ -166,23 +166,23 @@
                                 <span class="bg-primary"></span>
                                 <span class="bg-primary"></span>
                             </div>
-                            <div class="facility-text bg-primary">
+                            <div class="facility-text bg-primary"><a href="#">
                                 <h3 class="text-primary mb-3">ADHD</h3>
                                 <p class="mb-0">Attention Deficit / Hyperactivity Disorder (ADHD) is characterized by a mix of inattentiveness, hyperactivity, and impulsiveness! 🧠🚀</p>
-                            </div>
+                            </a></div>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="facility-item">
-                            <div class="facility-icon bg-primary">
-                                <span class="bg-primary"></span>
-                                <span class="bg-primary"></span>
+                            <div class="facility-icon bg-anxiety">
+                                <span class="bg-anxiety"></span>
+                                <span class="bg-anxiety"></span>
                             </div>
-                            <div class="facility-text bg-primary">
-                                <h3 class="text-primary mb-3">Anxiety</h3>
+                            <div class="facility-text bg-anxiety"><a href="#">
+                                <h3 class="text-anxiety mb-3">Anxiety</h3>
                                 <p class="mb-0">Anxiety disorders can 🌪️ interfere with a child's ability to focus on learning because of excessive worry and fear. 😰📚🧒</p>
-                            </div>
+                            </a></div>
                         </div>
                     </div>
                 </div>
@@ -202,13 +202,22 @@
                     <div class="row g-0">
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
                             <div class="position-relative h-100">
-                                <img class="position-absolute w-100 h-100 rounded" src="static/front/img/call-to-action.jpg" style="object-fit: cover;">
+                                <img class="overlay-image-essay wow fadeInUp" data-wow-delay="0.1s" src="static/front/img/EssayCorrection.svg" alt="Image à Intégrer">
                             </div>
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="h-100 d-flex flex-column justify-content-center p-5">
-                                <h1 class="mb-4">Essay Correction</h1>
-                                <p class="mb-4">Upload your handwritten essay, and our advanced AI system will analyze and correct it, providing valuable remarks and a grade to help you enhance your writing skills. Receive constructive feedback to refine your writing abilities and excel in your academic or professional pursuits.
+                                <h1 class="mb-4">📝 Essay Transformation Time! 🚀</h1>
+                                <p class="mb-4">Supercharge Your Writing Adventure!
+                                    Got a handwritten essay to share? Let our super-smart AI buddy give it a magical makeover! 🧙‍♂️✨ Not only will it make your essay sparkle, but it will also sprinkle some golden stars and helpful hints your way. 🌟📝
+                                    
+                                    Why should you join the fun?
+                                    
+                                    📊 Grades Galore: Get a grade that'll make you beam with pride! 🌈🎓
+                                    📣 Super Suggestions: Our AI buddy whispers smart tips to make your writing even better. 🤫📚
+                                    🎯 Crush Your Goals: Whether you're a kid genius or a future pro, we've got your back! 🚀👩‍🎓
+                                    
+                                    Ready to turn your writing into pure awesomeness? Upload now and let's get this creative party started! 🎉📝✨
                                 </p>
                                 <a class="btn btn-primary py-3 px-5" href="">Get Started Now<i class="fa fa-arrow-right ms-2"></i></a>
                             </div>

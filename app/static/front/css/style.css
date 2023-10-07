@@ -1,7 +1,7 @@
 /********** Template CSS **********/
 :root {
     --primary: #4baf4f;
-    --light: #FFF5F3;
+    --light: #b0f0b8;
     --dark: #103741;
 }
 
@@ -81,7 +81,7 @@ h4,
 .display-4,
 .display-5,
 .display-6 {
-    font-family: 'Lobster Two', cursive;
+    font-family: 'League Spartan', sans-serif;
     font-weight: 700;
 }
 

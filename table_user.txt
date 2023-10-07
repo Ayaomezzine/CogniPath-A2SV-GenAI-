@@ -1,0 +1,8 @@
+progression (Integer)
+Language (Integer)
+Intellect (Integer)
+Social Skills (Integer)
+si la    100 < progression < 200 : Silver Badge  200 < progression < 300 : Gold Badge
+Type_subscription (boolean: true ==> premium | false ==> standard)
+
+
