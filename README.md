@@ -75,16 +75,19 @@ flask run --host=0.0.0.0 --port=5015
 |    |    |
 |    |    |-- static/
 |    |    |    |
-|    |    |    |-- auth_back/
+|    |    |    |-- auth/
 |    |    |    |    |-- css/
 |    |    |    |    |-- img/
 |    |    |    |    |-- js/
 |    |    |    |
-|    |    |    |-- auth_front/
+|    |    |    |-- front/
 |    |    |    |    |-- css/
 |    |    |    |    |-- img/
 |    |    |    |    |-- js/
-|    |    |
+|    |    |    |-- back/
+|    |    |    |    |-- css/
+|    |    |    |    |-- img/
+|    |    |    |    |--js/
 |    |-- templates/                      # Templates used to render pages
 |    |    |
 |    |    |-- *.html                   # All HTML files
