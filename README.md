@@ -14,18 +14,7 @@ https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/911d4a02-3ef1-4eef
 <h3>The home page:</h3>
 <img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/f61b7e7d-4359-4b73-a9fc-9d9e70f80ca8" alt="project-screenshot" width=auto height="auto">
 
-<h3>Our Services:</h3>
-<h4>Essay Correction:</h4>
-<img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/c483cda8-aea2-4f52-91ba-c3aec27272bf" alt="project-screenshot" width="1200" height="auto">
 
-<h4>Emotions Recognition:</h4>
-<img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/7db3728c-8bbd-4791-8162-84d3a5f7d316" alt="project-screenshot" width="1200" height="auto">
-
-<h4>Text Simplification:</h4>
-<img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/ce30906c-1443-421f-aa78-f04d5798e226" alt="project-screenshot" width="1200" height="auto">
-
-<h4>Some guiding steps for how to use the functionnalities:</h4>
-<img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/c80adbff-ca8b-426c-8fbf-70d566604168" alt="project-screenshot" width="1200" height="auto">
 
  
 
