@@ -22,7 +22,6 @@ import openai
 import cv2
 import numpy as np
 openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = "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"
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 API_URL_trocr="https://api-inference.huggingface.co/models/microsoft/trocr-large-handwritten"
 headers = {"Authorization": "Bearer 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"}
