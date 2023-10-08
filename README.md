@@ -3,7 +3,7 @@
 <p align="center"><img src="https://socialify.git.ci/Azizomezine/CogniPath-A2SV/image?description=1&amp;descriptionEditable=CogniPath%20is%20a%20versatile%20and%20inclusive%20educational%20platform%20%20designed%20to%20support%20students%20of%20all%20backgrounds%20and%20abilities%20in%20their%20%20journey.%20&amp;font=Inter&amp;name=1&amp;pattern=Plus&amp;theme=Light" alt="project-image"></p>
 <h2>Project Screenshots:</h2>
 <h3>The home page:</h3>
-<img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/f5e7e303-a099-4d65-a32c-b83da70dbde1" alt="project-screenshot" width="1200" height="450/">
+<img src="https://raw.githubusercontent.com/Me710/CogniPath-A2SV-GenAI/main/assets/80206931/f5e7e303-a099-4d65-a32c-b83da70dbde1" alt="project-screenshot" width="auto" height="auto">
 
 <h3>Our Services:</h3>
 <h4>Essay Correction:</h4>
