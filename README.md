@@ -20,7 +20,11 @@
 
  
 
-https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/b739aaf7-2af3-48cf-b312-0149a8e99ba0
+
+
+https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/05823a45-2496-4e3c-9769-8d892d692249
+
+
 
 
 
