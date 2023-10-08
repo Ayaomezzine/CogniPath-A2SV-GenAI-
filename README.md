@@ -18,7 +18,11 @@
 <h4>Some guiding steps for how to use the functionnalities:</h4>
 <img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/c80adbff-ca8b-426c-8fbf-70d566604168" alt="project-screenshot" width="1200" height="auto">
 
- https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/f9028ad6-f716-4bdf-8003-9f26be4684d7
+ 
+
+https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/b739aaf7-2af3-48cf-b312-0149a8e99ba0
+
+
 
 <h2>🧐 Features</h2>
 
