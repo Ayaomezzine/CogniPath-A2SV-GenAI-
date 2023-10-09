@@ -12,12 +12,14 @@
 
 <div id="nav-bar">
   <input id="nav-toggle" type="checkbox"/>
-  <div id="nav-header"><a id="nav-title" target="_blank"><i class="fas fa-brain"></i>CogniPath</a>
+  <div id="nav-header"><a href="{{ url_for('index') }}" id="nav-title" target="_blank"><i class="fas fa-brain"></i>CogniPath</a>
     <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
     <hr/>
   </div>
   <div id="nav-content">
-    <div class="nav-button"><i class="fas fa-user"></i><a href="{{ url_for('profile') }}"><span>Profile</span></a></div>    <div class="nav-button"><i class="fas fa-face-laugh"></i><a href="{{ url_for('Emotions') }}"><span>Emotion Recognition</span></a></div>
+    <div class="nav-button"><i class="fas fa-user"></i><a href="{{ url_for('back_index') }}"><span>Dashboard</span></a></div>
+    <div class="nav-button"><i class="fas fa-user"></i><a href="{{ url_for('profile') }}"><span>Profile</span></a></div>    
+    <div class="nav-button"><i class="fas fa-face-laugh"></i><a href="{{ url_for('Emotions') }}"><span>Emotion Recognition</span></a></div>
     <div class="nav-button"><i class="fas fa-book"></i><span><a href="{{ url_for('Essay_correction') }}">Essay Correction</span></a></div>
     <div class="nav-button"><i class="fas fa-file-pen"></i><a href="{{ url_for('simplify') }}"><span>Text Simplification</span></a></div>
     <hr/>

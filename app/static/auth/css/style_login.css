@@ -47,8 +47,8 @@ a {
 
 button {
     border-radius: 20px;
-    border: 1px solid #4baf4f;
-    background-color: #4baf4f;
+    border: 1px solid #20c997;
+    background-color: #20c997;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -56,6 +56,10 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+    background-color: #42D8A6;
 }
 
 button:active {
@@ -93,8 +97,8 @@ input {
 .container {
     background-color: #fff;
     border-radius: 10px;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-            0 10px 10px rgba(0,0,0,0.22);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2), 
+            0 10px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
     width: 768px;
@@ -161,9 +165,9 @@ input {
 }
 
 .overlay {
-    background: #058013;
-    background: -webkit-linear-gradient(to right, #4baf4f, #28912c);
-    background: linear-gradient(to right, #4baf4f, rgb(8, 121, 33));
+    background: #3ec34d;
+    background: -webkit-linear-gradient(to right, #20c997, #55c059);
+    background: linear-gradient(to right, #20c997, rgb(94, 195, 116));
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -237,4 +241,9 @@ footer {
     right: 0;
     text-align: center;
     z-index: 999;
+}
+.image-logo{
+    height :35% ;
+    top: 10;
+    left: 100px;
 }

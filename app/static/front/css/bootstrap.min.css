@@ -9,7 +9,7 @@
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
     --bs-pink: #d63384;
-    --bs-red: #90ff42;
+    --bs-red: #ade5c0;
     --bs-orange: #4baf4f;
     --bs-yellow: #ffc107;
     --bs-green: #198754;
@@ -7834,7 +7834,7 @@ textarea.form-control-lg {
 }
 
 .bg-light {
-    background-color: #C8FAF4 !important
+    background-color: #c9f1c2 !important
 }
 .bg-anxiety {
     background-color: #fd7e14 !important

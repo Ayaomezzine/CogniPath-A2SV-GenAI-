@@ -14,15 +14,17 @@ from jinja2              import TemplateNotFound
 
 # App modules
 from app        import app, lm, db, bc
-from app.models import Users
+from app.models import Users, Activity, update_user_scores
+
 #from app.forms  import LoginForm, RegisterForm
 import requests
 import os
 import openai
 import cv2
 import numpy as np
+from dotenv import load_dotenv
+load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = "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"
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
 API_URL_trocr="https://api-inference.huggingface.co/models/microsoft/trocr-large-handwritten"
 headers = {"Authorization": "Bearer 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"}
@@ -31,10 +33,24 @@ headers = {"Authorization": "Bearer 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"}
 @lm.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
+
+@login_required
 @app.route('/back_index')
 def back_index():
-    # Add code to render your HTML template with the quiz here
-    return render_template('back_index.html')
+    # Access user attributes from the current_user object
+    count_activities = update_user_scores(current_user.email)
+    user_id = current_user.id
+    username = current_user.user
+    email = current_user.email
+    progression = current_user.progression
+    Language = current_user.Language
+    Intellect = current_user.Intellect
+    Social_Skills = current_user.Social_Skills
+    pathology = current_user.pathology
+    isPremium = current_user.isPremium
+
+    # Render the dashboard template and pass the user data
+    return render_template('dashboard.html', user=current_user, count_activities=count_activities)
 # Logout user
 @app.route('/logout')
 def logout():
@@ -53,6 +69,7 @@ def register():
             username = request.form['FullName']
             email = request.form['Email']
             password = request.form['mdp']
+            pathology = request.form['pathology']
 
             # Check if the required fields are not empty
             if username and email and password:
@@ -64,7 +81,7 @@ def register():
                     msg = 'Error: User exists!'
                 else:
                     pw_hash = bc.generate_password_hash(password)
-                    user = Users(username, email, pw_hash)
+                    user = Users(username, email, pw_hash,progression=0,Language=0,Intellect=0, Social_Skills=0,pathology='ASD',isPremium=False)
                     user.save()
                     msg = 'User created, please <a href="' + url_for('login') + '">login</a>'
                     success = True
@@ -154,10 +171,12 @@ def homepage():
 
 
 
-
+@login_required
 @app.route("/generate", methods=["POST"])
 def generate():
     selected_choice = request.form.get("choice")
+    print("selected item:",selected_choice)
+    activity = "Emotional Recognition"
     print("selected item:",selected_choice)
     # Define the payload for the Hugging Face API
     payload = {
@@ -169,6 +188,20 @@ def generate():
         response = requests.post(API_URL, headers=headers, json=payload)
         response.raise_for_status()  # Check for any errors in the API response
         image_bytes = response.content
+
+        new_activity = Activity(
+            title=selected_choice,
+            input=selected_choice,
+            output="An image",
+            user_email=current_user.email,
+            activity=activity,
+            social_score=10,
+            intellect_score=20,
+            language_score=30,
+            avg_score=20
+        )
+        new_activity.save()
+        update_user_scores(current_user.email)
 
         # Generate a unique filename for the image with a .jfif extension
         filename = "app/static/aa.jfif"
@@ -202,8 +235,8 @@ def Essay_correction():
 def Text_simplification():
     return render_template('Text_simplification.html')
 
-@app.route("/ocr", methods=["POST"])
-def ocr():
+@app.route("/generate_text", methods=["POST"])
+def generate_text():
     try:
         num_lines = int(request.form["num_lines"])
     except ValueError:
@@ -213,7 +246,7 @@ def ocr():
     lower = 110
     T = []
     generated_text = ""
-    
+
     try:
         cv_image = request.files["image"].read()
         nparr = np.frombuffer(cv_image, np.uint8)
@@ -221,7 +254,7 @@ def ocr():
         height, width, _ = cv_image.shape
     except Exception as e:
         return f"Error processing image: {str(e)}"
-    
+
     result = []
 
     for i in range(num_lines):
@@ -236,16 +269,29 @@ def ocr():
             generated_text += " "
         generated_text += result_i[0]['generated_text']
 
-    # Use the generated_text as input for ChatGPT
-    user_input = generated_text  # Set the OCR-generated text as the user input
+    # Render the HTML template with the generated_text
+    return render_template("EssayCorrection.html", generated_text=generated_text, num_lines=num_lines)
+@app.route("/correct_text", methods=["POST"])
+def correct_text():
+    user_input = request.form["user_input"]
+
+    # Use the user_input as input for ChatGPT
     messages = [
         {
-            "role": "system",
-            "content": "Act like a teacher and give me a grade for the paragraph given either A B C D E or F then point out where the grammar errors are and after give me the corrected paragraph"
+            "role": "user",
+            "content": user_input
         },
         {
-            "role": "user",
-            "content": user_input  # Use the OCR-generated text as the user's input
+            "role": "assistant",
+            "content": "Act like a teacher and assign a grade (A, B, C, D, E, or F) for the paragraph provided."
+        },
+        {
+            "role": "assistant",
+            "content": "And point out any grammar errors."
+        },
+        {
+            "role": "assistant",
+            "content": "Finally, provide the corrected paragraph."
         }
     ]
 
@@ -262,11 +308,13 @@ def ocr():
         )
 
         assistant_reply = response.choices[0].message["content"]
+        # Split the assistant's reply into grade, grammar errors, and corrected text
+        grade, grammar_errors, corrected_text = assistant_reply.split('\n', 2)
     except Exception as e:
         return f"Error generating assistant reply: {str(e)}"
 
-    # Render the HTML template with the values
-    return render_template("EssayCorrection.html", generated_text=generated_text, corrected_text=assistant_reply, num_lines=num_lines)
+    # Render the HTML template with the variables
+    return render_template("EssayCorrection.html", grade=grade, grammar_errors=grammar_errors, corrected_text=corrected_text, user_input=user_input)
 
 @app.route("/simplify", methods=["GET", "POST"])
 def simplify():

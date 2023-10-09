@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/magic.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/typing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
     
 
   
@@ -25,6 +26,13 @@
             </div>
         </div>
     </div>
+    <button class="icon-button" onclick="window.dialog.showModal();"><img src="../static/back/img/question.png" alt="Aide"></button>
+    <dialog id="dialog">
+        <h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
+        <p>1. "Select Your Perfect Phrase from the Fabulous Four!" 💫🌟</p>
+        <p>2. "Unlock the Power with One Magical Click! ✨"</p>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
     <form action="/generate" method="post" id="my-form">
         <div class="quiz-container">
             <div class="options-container-left">

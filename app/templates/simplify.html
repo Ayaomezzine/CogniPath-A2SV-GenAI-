@@ -21,11 +21,12 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
+ 
 <div class="wrapper">
     <form class="paper" action="/simplify" method="post" id="text-form">
         <div class="margin">Text Simplification: </div>
-        <textarea id="user_input" name="user_input" placeholder="Enter Your text ..." class="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;"></textarea>
+        <textarea id="user_input" name="user_input" placeholder="Enter Your text ..." class="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;">{{generated_text}}</textarea>
         <br>
         <input class="button" type="submit" value="Simplify">
     </form>
@@ -41,6 +42,13 @@
   </div>
 
 {% endif %}
+<dialog id="dialog"><button class="icon-button" onclick="window.dialog.showModal();"><img src="../static/back/img/question.png" alt="Aide"></button>
+	<h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
+	<p>1. "Unleash Your Thoughts in a Magical Paragraph!" 📝🌟</p>
+    <p>2. "Turn Complexity into Simplicity with a Single Tap!" 🧩🪄</p>
+	<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+</dialog> 
+
 <script>
   const form = document.getElementById("text-form");
   const loadingIndicator = document.getElementById("loading-indicator");

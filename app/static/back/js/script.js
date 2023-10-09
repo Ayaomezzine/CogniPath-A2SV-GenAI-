@@ -38,4 +38,12 @@ e.preventDefault();
 loadingIndicator.style.display = "block";
 form.submit();
 });
+
+const form2 = document.getElementById("my-form-2");
+const loadingIndicator2 = document.getElementById("loading-indicator");
+form2.addEventListener("submit", function (e) {
+e.preventDefault();
+loadingIndicator2.style.display = "block";
+form.submit();
+});
                                                 

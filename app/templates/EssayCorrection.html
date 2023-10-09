@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_loading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/text.css') }}">
+   
 </head>
 
 <body>
@@ -25,44 +27,60 @@
         </div>
     </div>  
     <!-- Form for image upload -->
-    <form action="/ocr" method="post" enctype="multipart/form-data" id="my-form">
+    <form action="/generate_text" method="post" enctype="multipart/form-data" id="my-form">
         <label for="image">Upload a handwritten paragraph image:</label>
         <label class="btn display-inline">
             Select Or Drop An Image
             <input type="file" name="image" @change="onChange" accept="image/*" required>
         </label>
         <label for="num_lines">Number of Lines:</label>
-        <input type="number" name="num_lines" placeholder="Number of Lines" required>
-        <input type="submit" class="btn btn-primary" value="Start">
+        <input type="number" name="num_lines" placeholder="Number of Lines" >
+        <input type="submit" class="btn btn-primary" value="Recognize">
     </form>
-    {% if user_input %}
-    <div class="user-input">
-        <p><strong>Your Question:</strong></p>
-        <p>{{ user_input }}</p>
-    </div>
-    {% endif %}
-
-    {% if result %}
-    <div class="response">
-        <p><strong>Assistant's Reply:</strong></p>
-        <p>{{ result }}</p>
-
-    </div>
-    {% endif %}
 
     {% if generated_text %}
-    <div class="ocr-response">
-        <p><strong>OCR Generated Text:</strong></p>
-        <p>{{ generated_text }}</p>
+    <div class="wrapper">
+        <div class="margin">Generated Text : </div>
+
+        <!-- Display generated_text in a textarea for editing -->
+        <form action="/correct_text" method="post" id="my-form-2">
+            <textarea id="user_input" name="user_input" class="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;">{{ generated_text }}</textarea>
+            <input type="submit" class="button" value="Correct paragraph">
+        </form>
     </div>
     {% endif %}
 
     {% if corrected_text %}
-    <div class="corrected-text">
-        <p><strong>Corrected Text:</strong></p>
-        <p>{{ corrected_text }}</p>
+    <div class="wrapper">
+        <div class="text-container scrollable-text">
+            <div class="text">
+               
+                <p>{{ grade }}</p>
+        
+           
+              
+                <p>{{ grammar_errors }}</p>
+           
+           
+               
+                <p>{{ corrected_text }}</p>
+            </div>
+        </div>
     </div>
-    {% endif %}
+    
+    {% endif %} 
+    <button class="icon-button" onclick="window.dialog.showModal();" ><img src="../static/back/img/question.png" alt="Aide"></button>
+    <dialog id="dialog"style="left: 500px;">
+        <h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
+        <p>1. Share Your Handwriting: Show us your awesome handwriting! 📝</p>
+        <p>2. Tell Us How Many Lines: How many lines did you write? Write it down! ✏️</p>
+        <p>3. Tap "Recognize": Touch the magic button that says "Recognize." </p>
+        <p>4. Fix and Change: Make it even better! ✨</p>
+        <p>5. Press "Correct": When you're ready, press "Correct" for a big surprise! 🌟</p>
+        <p>Now, you're all set to create something amazing with CogniPath! 🚀📚🌈</p>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
+    
     
     <script src="{{ url_for('static', filename='back/js/drag_and_drop.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -75,6 +93,13 @@
             loadingIndicator.style.display = "block";
             form.submit();
         });
+        // const form2 = document.getElementById("my-form-2");
+        // const loadingIndicator2 = document.getElementById("loading-indicator");
+        // form2.addEventListener("submit", function (e) {
+        // e.preventDefault();
+        // loadingIndicator2.style.display = "block";
+        // form.submit();
+        // });
     </script>
 </body>
 </html>
