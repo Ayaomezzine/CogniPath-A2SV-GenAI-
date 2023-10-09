@@ -15,3 +15,6 @@ app/db.sqlite3
 app/static/assets/node_modules
 app/static/assets/yarn.lock
 app/static/assets/.temp
+.env/
+.venv/
+app/.env
