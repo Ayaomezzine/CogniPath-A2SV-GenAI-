@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+      format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ColfaxAI";
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
+    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+body,
+input {
+  font-size: 16px;
+  line-height: 24px;
+  color: #353740;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
+.icon {
+  width: 34px;
+}
+h3 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: bold;
+  color: #202123;
+  margin: 16px 0 40px;
+}
+input[type="text"] {
+  padding: 12px 16px;
+  border: 1px solid #10a37f;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  
+}
+input[type="number"] {
+  width: 10%;
+  border: 1px solid #10a37f;
+  border-radius: 62px;
+  margin-bottom: 24px;
+  text-align: center;
+  
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+::placeholder {
+  color: #8e8ea0;
+  opacity: 1;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 40px;
+}
+/* Add this to your main.css or a separate CSS file */
+.text-container {
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  min-height: 100vh; /* This ensures the container takes up the full viewport height */
+  text-align: left;
+}
+
+.corrected-text {
+  color: aliceblue;
+  text-align: left;
+  max-width: 50%; /* Adjust the maximum width as needed */
+}
+h1,.h1{
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #103741
+}
+.ecriture{
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 500;
+}
+.btn-draganddrop{
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 400;
+  font-size: unset;
+  color: #fff;
+  background-color: #20c997;
+  padding: 12px 75px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 50px;
+  transition: 1000ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  width: 160px;
+}
+
+.btn-draganddrop:hover{
+
+transition : 1000ms;
+padding: 12px 75px;
+transform : translateY(-0px);
+background-color: #fff;
+color: #20c997;
+border: solid 2px #20c997;
+}
+
+.btn-recognize{
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 400;
+  font-size: unset;
+  color: #fff;
+  background-color: #20c997;
+  padding: 12px 121px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 50px;
+  transition: 1000ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-recognize:hover{
+
+transition : 1000ms;
+padding: 12px 121px;
+transform : translateY(-0px);
+background-color: #fff;
+color: #20c997;
+border: solid 2px #20c997;
+}
+.btn-correct{
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 400;
+  font-size: unset;
+  color: #fff;
+  background-color: #20c997;
+  padding: 12px 75px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 50px;
+  transition: 1000ms;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-correct:hover{
+
+transition : 1000ms;
+padding: 12px 121px;
+transform : translateY(-0px);
+background-color: #fff;
+color: #20c997;
+border: solid 2px #20c997;
+}
+.form-habalni{
+  /* padding-left: 10%; */
+  flex:1;
+  margin-right: 108px;
+  
+}
+.haja{
+  display: flex;
+  align-items: center;
+}

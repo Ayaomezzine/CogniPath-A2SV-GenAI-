@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/magic.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/typing.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     
 
   
@@ -31,6 +34,7 @@
         <h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
         <p>1. "Select Your Perfect Phrase from the Fabulous Four!" 💫🌟</p>
         <p>2. "Unlock the Power with One Magical Click! ✨"</p>
+        <img src="../static/back/img/emotions.gif" height=100% width="100%">
         <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
     </dialog>
     <form action="/generate" method="post" id="my-form">
@@ -41,7 +45,7 @@
                     <div class="option" id="left-option-2">An Angry girl wearing red dress</div>
                 </div>
             </div>
-            <button id="submit-button" type="submit"><img src="{{ url_for('static', filename='back/img/magic-wand.gif') }}" alt=""></button>
+            <button id="submit-button" type="submit"style="background: none; border: none; cursor: pointer;"><img src="{{ url_for('static', filename='back/img/magic-wand.gif') }}" alt=""></button>
             <div class="options-container">
                 <div class="options">
                     <div class="option" id="right-option-1">Surprised child </div>

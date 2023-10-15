@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Correction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_loading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/text.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/table.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700;800&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        .essay_image{
+            padding-left: 10%;
+            padding-top: 5%;
+            padding-top: -1000px;
+        }
+       </style>
+</head>
+
+<body>
+    <h1>Essay Correction</h1>
+
+    <div id="sidebar">
+        {% include 'back_index.html' %}
+    </div>
+    <div id="loading-indicator" class="popup">
+        <div class="popup-content">
+            <div class="u-loading">
+                <div class="u-loading__symbol">
+                    <img src="../static/back/img/Logo_A2SV.svg">
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- Form for image upload -->
+    <form action="/generate_text" method="post" enctype="multipart/form-data" id="my-form">
+        <label for="image" class="ecriture">Show us your awesome handwriting! 📝:</label>
+        <label class="btn-draganddrop">
+            Select Or Drop An Image
+            <input type="file" id="image__input" name="image" @change="onChange" accept="image/*" required>
+        </label>
+        <br>
+        <label for="num_lines"class="ecriture">How many lines did you wrote ✏️?</label>
+        <input type="number" name="num_lines"class="ecriture" placeholder="" >
+        <br>
+        <button class="btn-recognize">Recognize</button>
+        <br>
+    </form>
+    <div class="haja">
+
+        <div id="imagePreview" class="essay_image"></div>
+    </div>
+
+
+    {% if generated_text %}
+    <div class="wrapper">
+        
+        <div id="audioPlayerDiv" hidden></div>
+        <div class="ecriture">Your writing : <button id="queryButton"class="icon-button-voice" ><img src="../static/back/img/voice.svg" alt="Aide"></button></div><br>
+
+        <!-- Display generated_text in a textarea for editing -->
+        <form action="/correct_text" method="post" id="my-form-2">
+            <textarea id="user_input" name="user_input" class="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;">{{ generated_text }}</textarea>
+            <br>
+            <input type="submit" class="btn-correct" value="Correct paragraph">
+        </form>
+        
+    </div>
+    {% endif %}
+
+    {% if corrected_text %}
+    <div class="wrapper">
+       
+                 <p>{{ grade }}</p>
+         
+            
+                 <div class="pros-cons-container">
+                     <div class="pros-container">
+                       <h2 class="heading">Nicely Done</h2>
+               
+                       <ul class="pros">
+                         {% for point in pros.split('-')[1:] %} 
+                      <li>{{ point.strip() }}</li>
+                         {% endfor %}
+                     </ul>
+                     </div>
+               
+                     <div class="cons-container">
+                       <h2 class="heading">Things to improve</h2>
+                       <ul class="cons">
+                         {% for point in cons.split('-')[1:] %} 
+                        <li>{{ point.strip()}}</li>
+                           {% endfor %}
+                      
+                        
+                       </ul>
+                     </div>
+ 
+                   </div>              
+       
+              
+                
+                
+           
+     </div>
+     
+     {% endif %} 
+    <button class="icon-button" onclick="window.dialog.showModal();" ><img src="../static/back/img/question.png" alt="Aide"></button>
+    <dialog id="dialog"style="top: 20%; left: 40%;">
+        <h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
+        <p>1. Share Your Handwriting: Show us your awesome handwriting! 📝</p>
+        <p>2. Tell Us How Many Lines: How many lines did you write? Write it down! ✏️</p>
+        <p>3. Tap "Recognize": Touch the magic button that says "Recognize." </p>
+        <p>4. Fix and Change: Make it even better! ✨</p>
+        <p>5. Press "Correct": When you're ready, press "Correct" for a big surprise! 🌟</p>
+        <p>Now, you're all set to create something amazing with CogniPath! 🚀📚🌈</p>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
+    <script>
+        document.getElementById("image__input").addEventListener("change", function () {
+            const imagePreview = document.getElementById("imagePreview");
+            const file = this.files[0];
+    
+            if (file) {
+                const reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.className = "preview-image";
+                    img.style.width = "50%";
+                    img.style.height = "50%";
+                    img.style.marginBottom="150px"
+                    imagePreview.innerHTML = "";
+                    imagePreview.appendChild(img);
+                };
+    
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.innerHTML = ""; // Clear the preview if no file is selected
+            }
+        });
+    </script>
+    <script>
+        async function query(data) {
+            const response = await fetch(
+                "https://api-inference.huggingface.co/models/facebook/fastspeech2-en-ljspeech",
+                {
+                    headers: { Authorization: "Bearer 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" },
+                    method: "POST",
+                    body: JSON.stringify(data),
+                }
+            );
+            return response;
+        }
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load the model when the page is fully loaded
+            await query({ "inputs": "Initial load" });
+        });
+        document.getElementById("queryButton").addEventListener("click", async () => {
+            const userInput = document.getElementById("user_input").value;
+            const inputData = { "inputs": userInput };
+            const response = await query(inputData);
+            const audioPlayerDiv = document.getElementById("audioPlayerDiv");
+            
+            if (response.ok) {
+                // Create an audio element to play the audio file
+                const audioElement = document.createElement("audio");
+                audioElement.src = URL.createObjectURL(await response.blob());
+                audioElement.controls = true;
+
+                // Add the audio element to the div
+                audioPlayerDiv.innerHTML = "";
+                audioPlayerDiv.appendChild(audioElement);
+                // Play the audio automatically when it's loaded
+                audioElement.addEventListener("canplaythrough", () => {
+                    audioElement.play();
+                });
+            } else {
+                // Handle errors here
+                audioPlayerDiv.textContent = "Error: Unable to fetch audio.";
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='back/js/drag_and_drop.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        const form = document.getElementById("my-form");
+        const loadingIndicator = document.getElementById("loading-indicator");
+    
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loadingIndicator.style.display = "block";
+            form.submit();
+        });
+        // const form2 = document.getElementById("my-form-2");
+        // const loadingIndicator2 = document.getElementById("loading-indicator");
+        // form2.addEventListener("submit", function (e) {
+        // e.preventDefault();
+        // loadingIndicator2.style.display = "block";
+        // form.submit();
+        // });
+    </script>
+</body>
+</html>

@@ -6,22 +6,31 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
   <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_slide.css') }}">
   <script src="https://kit.fontawesome.com/823f594b7d.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
 </head>
+<style>
+  .najwa{
+    z-index: 999;
+  }
+</style>
 <body>
 <!-- partial:index.partial.html -->
 
-<div id="nav-bar">
+<div id="nav-bar"class="najwa">
   <input id="nav-toggle" type="checkbox"/>
-  <div id="nav-header"><a href="{{ url_for('index') }}" id="nav-title" target="_blank"><i class="fas fa-brain"></i>CogniPath</a>
+  <div id="nav-header"><a href="{{ url_for('index') }}" id="nav-title"><i class="fas fa-brain"></i>CogniPath</a>
     <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
     <hr/>
   </div>
   <div id="nav-content">
-    <div class="nav-button"><i class="fas fa-user"></i><a href="{{ url_for('back_index') }}"><span>Dashboard</span></a></div>
+    <div class="nav-button"><i class="fas fa-chart-line"></i><a href="{{ url_for('back_index') }}"><span>Dashboard</span></a></div>
     <div class="nav-button"><i class="fas fa-user"></i><a href="{{ url_for('profile') }}"><span>Profile</span></a></div>    
     <div class="nav-button"><i class="fas fa-face-laugh"></i><a href="{{ url_for('Emotions') }}"><span>Emotion Recognition</span></a></div>
     <div class="nav-button"><i class="fas fa-book"></i><span><a href="{{ url_for('Essay_correction') }}">Essay Correction</span></a></div>
-    <div class="nav-button"><i class="fas fa-file-pen"></i><a href="{{ url_for('simplify') }}"><span>Text Simplification</span></a></div>
+    <div class="nav-button"><i class="fas fa-file-pen"></i><a href="{{ url_for('simplify') }}"><span>Storyfy</span></a></div>
     <hr/>
    
     <div class="nav-button"><i class="fas fa-gem"></i><span>CogniPath Pro</span></div>

@@ -1,0 +1,133 @@
+  
+  input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .align-center {
+    text-align: center;
+  }
+  
+  .helper {
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  .hidden.image {
+    display: inline-block !important;
+  }
+  
+  .display-inline {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .img {
+    border: 1px solid #f6f6f6;
+    display: inline-block;
+    height: auto;
+    max-height: 80%;
+    max-width: 80%;
+    width: auto;
+  }
+  
+  .drop {
+    background-color: #f2f2f2;
+    border: 4px dashed #ccc;
+    background-color: #f6f6f6;
+    border-radius: 2px;
+    height: 100%;
+    max-height: 400px;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .icon-button {
+    background: none; /* Supprime le fond du bouton */
+    border: none; /* Supprime la bordure du bouton */
+    cursor: pointer; /* Change le curseur en main lorsqu'on survole le bouton */
+}
+
+.icon-button img {
+    max-width: 10%; /* Réduire la largeur de l'icône pour qu'elle s'adapte au bouton */
+    max-height: 10%; /* Réduire la hauteur de l'icône pour qu'elle s'adapte au bouton */
+    position: fixed;
+    bottom: 20px; /* You can adjust this value to control the distance from the bottom */
+    right: 20px; 
+    
+    
+}
+.icon-button-voice {
+  background: none; /* Supprime le fond du bouton */
+  border: none; /* Supprime la bordure du bouton */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole le bouton */
+}
+
+.icon-button-voice img {
+  max-width: 10%; /* Réduire la largeur de l'icône pour qu'elle s'adapte au bouton */
+  max-height: 10%; /* Réduire la hauteur de l'icône pour qu'elle s'adapte au bouton */
+  padding-right: 85%;
+  
+}
+.container-icon {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 100% de la hauteur de la fenêtre */
+}
+dialog {
+  padding: 1rem 3rem;
+  background: white;
+  max-width: 400px;
+  padding-top: 2rem;
+  border-radius: 20px;
+  border: 0;
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.10);
+  animation: fadeIn 1s ease both;
+}
+
+dialog::backdrop {
+  animation: fadeIn 1s ease both;
+  background: rgba(255, 255, 255, 0.40);
+  z-index: 2;
+  backdrop-filter: blur(20px);
+}
+
+dialog .x {
+  filter: grayscale(1);
+  border: none;
+  background: none;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  transition: filter ease, transform 0.3s;
+  cursor: pointer;
+  transform-origin: center;
+}
+
+dialog .x:hover {
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+
+dialog h2 {
+  font-weight: 600;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+
+dialog p {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  padding: 0.5rem 0;
+}
+
+dialog p a:visited {
+  color: rgb(var(--vs-primary));
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Simplification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/text.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_loading.css') }}">
+</head>
+<body>
+   
+    <div id="sidebar" >
+        {% include 'back_index.html' %}
+    </div>
+   <!-- Form for user input -->
+   <div id="loading-indicator" class="popup">
+    <div class="popup-content">
+        <div class="u-loading">
+            <div class="u-loading__symbol">
+                <img src="../static/back/img/Logo_A2SV.svg">
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="wrapper">
+    <form class="paper" action="/simplify" method="post" id="text-form">
+        <div class="margin">Text Simplification: </div>
+        <textarea id="user_input" name="user_input" placeholder="Enter Your text ..." class="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;">{{generated_text}}</textarea>
+        <br>
+        <input class="button" type="submit" value="Simplify">
+    </form>
+</div>
+{% if corrected_text %}
+<div class="wrapper">
+    <div class="text-container scrollable-text">
+      <div class="text">
+        <p>Simplified Text:</strong></p>
+        <p>{{ corrected_text }}</p>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+<button class="icon-button" onclick="window.dialog.showModal();" ><img src="../static/back/img/question.png" alt="Aide"></button>
+<dialog id="dialog"style="position: fixed; top: 20%; left: 35%;">
+	<h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
+	<p>1. "Unleash Your Thoughts in a Magical Paragraph!" 📝🌟</p>
+    <p>2. "Turn Complexity into Simplicity with a Single Tap!" 🧩</p>
+    <img src="../static/back/img/text_simplification.gif" height=100% width="100%">
+	<button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+</dialog> 
+
+<script>
+  const form = document.getElementById("text-form");
+  const loadingIndicator = document.getElementById("loading-indicator");
+
+  form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      loadingIndicator.style.display = "block";
+      form.submit();
+  });
+</script>
+   
+</body>
+</html>

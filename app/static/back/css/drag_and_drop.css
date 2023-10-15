@@ -1,17 +1,3 @@
-.btn {
-    background-color: #118545;
-    border: 0;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-weight: bold;
-    padding: 15px 35px;
-    position: relative;
-  }
-  
-  .btn:hover {
-    background-color: #722040;
-  }
   
   input[type="file"] {
     position: absolute;
@@ -72,7 +58,23 @@
 .icon-button img {
     max-width: 10%; /* Réduire la largeur de l'icône pour qu'elle s'adapte au bouton */
     max-height: 10%; /* Réduire la hauteur de l'icône pour qu'elle s'adapte au bouton */
+    position: fixed;
+    bottom: 20px; /* You can adjust this value to control the distance from the bottom */
+    right: 20px; 
     
+    
+}
+.icon-button-voice {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 46%;
+}
+
+.icon-button-voice img {
+  max-width: 10%; /* Réduire la largeur de l'icône pour qu'elle s'adapte au bouton */
+  max-height: 10%; /* Réduire la hauteur de l'icône pour qu'elle s'adapte au bouton */
+  
 }
 .container-icon {
   position: relative;

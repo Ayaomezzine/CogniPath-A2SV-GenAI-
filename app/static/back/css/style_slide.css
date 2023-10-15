@@ -10,7 +10,7 @@
 
 body {
   margin: auto;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "League Spartan", sans-serif;
   overflow: auto;
   background: linear-gradient(315deg, #3cb055 3%, #14e084 38%, #4894B6 68%, #3ec677 98%);
   animation: gradient 20s ease infinite;
@@ -120,7 +120,7 @@ body {
 }
 
 #nav-bar {
-  position: absolute;
+  position: fixed;
   left: 1vw;
   top: 1vw;
   height: calc(100% - 2vw);
@@ -129,7 +129,7 @@ body {
   display: flex;
   flex-direction: column;
   color: var(--navbar-light-primary);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "League Spartan", sans-serif;;
   overflow: hidden;
   user-select: none;
 }

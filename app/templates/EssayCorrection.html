@@ -7,8 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/drag_and_drop.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='back/css/style_loading.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/text.css') }}">
-   
+    <link rel="stylesheet" href="{{ url_for('static', filename='back/css/table.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        .essay_image{
+            padding-left: 10%;
+            padding-top: 5%;
+            padding-top: -1000px;
+        }
+       </style>
 </head>
 
 <body>
@@ -27,50 +37,93 @@
         </div>
     </div>  
     <!-- Form for image upload -->
-    <form action="/generate_text" method="post" enctype="multipart/form-data" id="my-form">
-        <label for="image">Upload a handwritten paragraph image:</label>
-        <label class="btn display-inline">
+    <form action="/generate_text" method="post" enctype="multipart/form-data" id="my-form" style="margin-left: 20%;">
+        <label for="image" class="ecriture">Show us your awesome handwriting! 📝:</label>
+        <label class="btn-draganddrop">
             Select Or Drop An Image
-            <input type="file" name="image" @change="onChange" accept="image/*" required>
+            <input type="file" id="image__input" name="image" @change="onChange" accept="image/*" required>
         </label>
-        <label for="num_lines">Number of Lines:</label>
-        <input type="number" name="num_lines" placeholder="Number of Lines" >
-        <input type="submit" class="btn btn-primary" value="Recognize">
+        <br>
+        <label for="num_lines"class="ecriture">How many lines did you wrote ✏️?</label>
+        <input type="number" name="num_lines"class="ecriture" placeholder="" >
+        <br>
+        <button class="btn-recognize">Recognize</button>
+        <br>
     </form>
+
 
     {% if generated_text %}
     <div class="wrapper">
-        <div class="margin">Generated Text : </div>
-
+        
+        <div id="audioPlayerDiv" hidden></div>
+        <div class="ecriture2">Your writing : <button id="queryButton"class="icon-button-voice" ><img src="../static/back/img/voice.svg" alt="Aide"></button><div class="spinner"id="loader">
+            <h3><span class="visually-hidden">visuallyhidden</span></h3>
+        </div></div><br>
+        
         <!-- Display generated_text in a textarea for editing -->
         <form action="/correct_text" method="post" id="my-form-2">
-            <textarea id="user_input" name="user_input" class="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;">{{ generated_text }}</textarea>
-            <input type="submit" class="button" value="Correct paragraph">
+            <div class="haja">
+                <textarea id="user_input" name="user_input" class="text-2" rows="4"style="font-weight: 100;" >{{ generated_text }}</textarea>
+                <div class="ecriture3">Your handwritten paragraph : </div>
+                <img class="image-par"src="data:image/jpeg;base64, {{ imgg }}" alt="Your Image Description" />
+            </div>
+            <br>
+            <input type="submit" class="btn-correct" value="Correct paragraph">
+
         </form>
+        
     </div>
     {% endif %}
 
-    {% if corrected_text %}
+    {% if grade %}
     <div class="wrapper">
-        <div class="text-container scrollable-text">
-            <div class="text">
+       
+                 {% if grade=='A' %}
+                 <img src="../static/back/img/A.png" class="grade">
+                 {% elif grade == 'B' %}
+                 <img src="../static/back/img/B.png" class="grade">
+                 {% elif grade == 'C' %}
+                 <img src="../static/back/img/C.png" class="grade">
+                 {% elif grade == 'D' %}
+                 <img src="../static/back/img/D.png" class="grade">
+                 {% else %}
+                 <img src="../static/back/img/D.png" class="grade">
+                 {% endif %}
+         
+            
+                 <div class="pros-cons-container">
+                     <div class="pros-container">
+                       <h2 class="heading">Nicely Done</h2>
                
-                <p>{{ grade }}</p>
-        
-           
+                       <ul class="pros">
+                         {% for point in pros.split('-')[1:] %} 
+                      <li>{{ point.strip() }}</li>
+                         {% endfor %}
+                     </ul>
+                     </div>
+               
+                     <div class="cons-container">
+                       <h2 class="heading">Things to improve</h2>
+                       <ul class="cons">
+                         {% for point in cons.split('-')[1:] %} 
+                        <li>{{ point.strip()}}</li>
+                           {% endfor %}
+                      
+                        
+                       </ul>
+                     </div>
+ 
+                   </div>              
+       
               
-                <p>{{ grammar_errors }}</p>
+                
+                
            
-           
-               
-                <p>{{ corrected_text }}</p>
-            </div>
-        </div>
-    </div>
-    
-    {% endif %} 
+     </div>
+     
+     {% endif %} 
     <button class="icon-button" onclick="window.dialog.showModal();" ><img src="../static/back/img/question.png" alt="Aide"></button>
-    <dialog id="dialog"style="left: 500px;">
+    <dialog id="dialog">
         <h2>"These Are Your Guiding Steps for How to Use" 🌟</h2>
         <p>1. Share Your Handwriting: Show us your awesome handwriting! 📝</p>
         <p>2. Tell Us How Many Lines: How many lines did you write? Write it down! ✏️</p>
@@ -80,8 +133,80 @@
         <p>Now, you're all set to create something amazing with CogniPath! 🚀📚🌈</p>
         <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
     </dialog>
+    <script>
+        document.getElementById("image__input").addEventListener("change", function () {
+            const imagePreview = document.getElementById("imagePreview");
+            const file = this.files[0];
     
+            if (file) {
+                const reader = new FileReader();
     
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.className = "preview-image";
+                    img.style.width = "50%";
+                    img.style.height = "50%";
+                    img.style.marginBottom="150px"
+                    imagePreview.innerHTML = "";
+                    imagePreview.appendChild(img);
+                };
+    
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.innerHTML = ""; // Clear the preview if no file is selected
+            }
+        });
+    </script>
+    <script>
+        async function query(data) {
+            const response = await fetch(
+                "https://api-inference.huggingface.co/models/facebook/fastspeech2-en-ljspeech",
+                {
+                    headers: { Authorization: "Bearer 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" },
+                    method: "POST",
+                    body: JSON.stringify(data),
+                }
+            );
+            return response;
+        }
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Load the model when the page is fully loaded
+            await query({ "inputs": "Initial load" });
+        });
+        document.getElementById("queryButton").addEventListener("click", async () => {
+    // Afficher le loader pendant le chargement
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
+
+    const userInput = document.getElementById("user_input").value;
+    const inputData = { "inputs": userInput };
+    const response = await query(inputData);
+    const audioPlayerDiv = document.getElementById("audioPlayerDiv");
+
+    if (response.ok) {
+        // Créer un élément audio pour jouer le fichier audio
+        const audioElement = document.createElement("audio");
+        audioElement.src = URL.createObjectURL(await response.blob());
+        audioElement.controls = true;
+
+        // Ajouter l'élément audio au div
+        audioPlayerDiv.innerHTML = "";
+        audioPlayerDiv.appendChild(audioElement);
+
+        // Lorsque le chargement est terminé, masquer le loader et jouer l'audio
+        audioElement.addEventListener("canplaythrough", () => {
+            loader.style.display = "none"; // Masquer le loader
+            audioElement.play();
+        });
+    } else {
+        // Gérer les erreurs ici
+        loader.style.display = "none"; // Masquer le loader en cas d'erreur
+        audioPlayerDiv.textContent = "Error: Unable to fetch audio.";
+    }
+});
+
+    </script>
     <script src="{{ url_for('static', filename='back/js/drag_and_drop.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>

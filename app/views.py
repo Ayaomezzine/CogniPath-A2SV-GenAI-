@@ -23,6 +23,7 @@ import openai
 import cv2
 import numpy as np
 from dotenv import load_dotenv
+import base64
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
@@ -246,31 +247,39 @@ def generate_text():
     lower = 110
     T = []
     generated_text = ""
-
+    result = []
+    
     try:
         cv_image = request.files["image"].read()
+        imgg=cv_image
+        imgg = base64.b64encode(cv_image).decode("utf-8")
         nparr = np.frombuffer(cv_image, np.uint8)
         cv_image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         height, width, _ = cv_image.shape
     except Exception as e:
         return f"Error processing image: {str(e)}"
-
-    result = []
-
+    
     for i in range(num_lines):
         T.append(cv_image[upper:lower, 10:width])
         upper += 110
         lower += 110
         _, img_bytes = cv2.imencode(".jpg", T[i])
-        response_i = requests.post(API_URL_trocr, headers=headers, data=img_bytes.tobytes())
+        
+        response_i = {}  # Initialize response_i as an empty dictionary
+        
+        while not response_i:
+            response_i = requests.post(API_URL_trocr, headers=headers, data=img_bytes.tobytes())
+        
         result_i = response_i.json()
         result.append(result_i)
+        
         if i > 0:
             generated_text += " "
         generated_text += result_i[0]['generated_text']
 
     # Render the HTML template with the generated_text
-    return render_template("EssayCorrection.html", generated_text=generated_text, num_lines=num_lines)
+    return render_template("EssayCorrection.html", generated_text=generated_text, num_lines=num_lines,imgg=imgg)
+
 @app.route("/correct_text", methods=["POST"])
 def correct_text():
     user_input = request.form["user_input"]
@@ -287,11 +296,11 @@ def correct_text():
         },
         {
             "role": "assistant",
-            "content": "And point out any grammar errors."
+            "content": "Analyze the pros of the paragraph."
         },
         {
             "role": "assistant",
-            "content": "Finally, provide the corrected paragraph."
+            "content": "Analyze the cons of the paragraph."
         }
     ]
 
@@ -308,14 +317,29 @@ def correct_text():
         )
 
         assistant_reply = response.choices[0].message["content"]
-        # Split the assistant's reply into grade, grammar errors, and corrected text
-        grade, grammar_errors, corrected_text = assistant_reply.split('\n', 2)
+        
+        # Use markers to split the response into sections
+        markers = ["Grade:", "Pros:", "Cons:"]
+        section_contents = {}
+        
+        current_section = markers[0]
+        for line in assistant_reply.split('\n'):
+            if line in markers:
+                current_section = line
+            else:
+                section_contents.setdefault(current_section, []).append(line)
+        
+        grade = "\n".join(section_contents["Grade:"])
+        pros = "\n".join(section_contents["Pros:"])
+        cons = "\n".join(section_contents["Cons:"])
+        
+        # Check if "Corrected Text:" is in the response
+
     except Exception as e:
         return f"Error generating assistant reply: {str(e)}"
 
     # Render the HTML template with the variables
-    return render_template("EssayCorrection.html", grade=grade, grammar_errors=grammar_errors, corrected_text=corrected_text, user_input=user_input)
-
+    return render_template("EssayCorrection.html", grade=grade, pros=pros, cons=cons, user_input=user_input)
 @app.route("/simplify", methods=["GET", "POST"])
 def simplify():
     if request.method == "GET":
@@ -329,7 +353,7 @@ def simplify():
     messages = [
         {
             "role": "system",
-            "content": "Simplify the paragraph given please so a 5-year-old can understand it make it like a short story add a lot of emoji s : "
+            "content": "Simplify the paragraph given please so a 5-year-old can understand it make it like a short story of 6 sentences add some emoji s : "
         },
         {
             "role": "user",
