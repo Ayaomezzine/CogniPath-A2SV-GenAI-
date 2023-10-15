@@ -1,88 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Hugo 0.88.1">
-<title>CogniPath Authentication - Login page</title>
-
-<!-- CSS only -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/assets/css/custom.css">
-
-<style>
-    /* Custom CSS to style 'COGNIPATH Sign IN' and the 'Sign IN' button */
-    .cognipath-title {
-        color: lightgreen;
-    }
-
-    .signin-button {
-        background-color: lightgreen;
-        border-color: lightgreen;
-    }
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CogniPath Authentication</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth/css/style_login.css') }}">
 </head>
 <body>
-
-<main>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 mb-3 cognipath-title">
-                    COGNIPATH 
-                </h1>
-                <p class="col-lg-10 fs-4">
-                    Accessible Education for Everyone. Access a personalized and expertly guided learning platform that caters to your unique learning needs, regardless of any learning challenges you may have.
-                </p>
-            </div>
-            <div class="col-md-10 mx-auto col-lg-5">
-
-                <form method="post" action="" class="p-4 p-md-5 border rounded-3 bg-light">
-
-                    {{ form.hidden_tag() }}
-
-                    <p class="fw-bold">
-                        {% if msg %}
-                            {{ msg | safe }}
-                        {% else %}
-                            Add your credentials
-                        {% endif %}
-                    </p>
-
-                    <br />
-
-                    <div class="form-floating mb-3">
-                        {{ form.username(class="form-control") }}
-                        <label for="floatingInput">Username</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        {{ form.password(class="form-control", type="password") }}
-                        <label for="floatingPassword">Password</label>
-                    </div>
-                    <br />
-                    <!--
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div> -->
-                    <button class="w-100 btn btn-lg btn-primary signin-button" type="submit">Sign IN</button>
-                    <hr class="my-4">
-                    <small class="text-muted">
-                        Don't have an account? <a href="{{ url_for('register') }}" class="text-right">Register</a>
-                    </small>
-                </form>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="signupForm" method="POST" action="">
+                <h1 style="color: #20c997;">Create Account</h1>
+                <input type="hidden" name="signup" value="1">  <!-- Hidden field to identify signin form -->
+                <input type="hidden" name="id" id="id" class="form-control" required value="2">
+                <input type="text" placeholder="Full Name" id="FullName" name="FullName" required>
+                <input type="email" placeholder="Email" id="Email" name="Email" required>
+                <input type="password" placeholder="Password" id="mdp" name="mdp" required>
+                <select id="pathology" name="pathology" required class="input-field">
+                    <option value="ASD">ASD</option>
+                    <option value="ADHD">ADHD</option>
+                    <option value="Dyslexia">Dyslexia</option>
+                </select>
+                <style>
+                .input-field {
+                    /* Add your desired styling here */
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 16px;
+                }
+                </style>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="" method="POST">
+                
+                <h1 style="color: #20c997;">Sign in</h1>
+                <input type="hidden" name="signin" value="1">  <!-- Hidden field to identify signin form -->
+                <input type="email" placeholder="Email" id="Email_login" name="Email_login" />
+                <input type="password" placeholder="Password" id="mdp_login" name="mdp_login" />
+                <a href="#">Forgot your password?</a>
+                <button name="signinForm">Sign In</button>
+            </form>
+        </div>        
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <img src="static/front/img/hi.png" height="50%">
+                    <h1>Hello, Friend!</h1>
+                    <p>Welcome to CogniPath, Your interactive learning plateform</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
             </div>
         </div>
     </div>
-
-</main>
-
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="{{ url_for('static', filename='auth/js/controle_de_saisie.js') }}"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ from jinja2              import TemplateNotFound
 
 # App modules
 from app        import app, lm, db, bc
-from app.models import Users, Activity, update_user_scores
+from app.models import *
 
 #from app.forms  import LoginForm, RegisterForm
 import requests
@@ -36,22 +36,21 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 @login_required
+@login_required
 @app.route('/back_index')
 def back_index():
     # Access user attributes from the current_user object
     count_activities = update_user_scores(current_user.email)
-    user_id = current_user.id
-    username = current_user.user
-    email = current_user.email
-    progression = current_user.progression
-    Language = current_user.Language
-    Intellect = current_user.Intellect
-    Social_Skills = current_user.Social_Skills
-    pathology = current_user.pathology
-    isPremium = current_user.isPremium
-
+    activities_count_per_days = get_activities_count_by_day()
+    activities_count_per_week = get_activities_count_by_week()
+    activities_count_per_month = get_activities_count_by_month()
+    recent_activities = get_recent_activities()
     # Render the dashboard template and pass the user data
-    return render_template('dashboard.html', user=current_user, count_activities=count_activities)
+    return render_template('dashboard.html', user=current_user, count_activities=count_activities, 
+                           activities_count_per_days=activities_count_per_days,
+                           activities_count_per_week=activities_count_per_week,
+                            activities_count_per_month=activities_count_per_month,
+                            recent_activities = recent_activities )
 # Logout user
 @app.route('/logout')
 def logout():
@@ -108,7 +107,7 @@ def register():
             else:
                 msg = 'Input error'
 
-    return render_template('login2.html', msg=msg, success=success)
+    return render_template('login.html', msg=msg, success=success)
 
 
 # Authenticate user
@@ -138,7 +137,7 @@ def login():
         else:
             msg = "Unknown user"
 
-    return render_template( 'login2.html', form=form, msg=msg )
+    return render_template( 'login.html', form=form, msg=msg )
 
 # App main route + generic routing
 @app.route('/', defaults={'path': 'index'})
@@ -150,7 +149,7 @@ def index(path):
 
     try:
 
-        return render_template( 'index3.html')
+        return render_template( 'index.html')
     
     except TemplateNotFound:
         return render_template('page-404.html'), 404
@@ -167,7 +166,7 @@ def sitemap():
 
 @app.route('/homepage', methods=['GET', 'POST'])
 def homepage():
-    return render_template('index3.html')
+    return render_template('index.html')
 
 
 
@@ -228,14 +227,17 @@ def Emotions():
     print("generated_text:",generated_text)
     return render_template('Emotions_Recognition.html',generated_text=generated_text)
 
+@login_required
 @app.route('/Essay_correction')
 def Essay_correction():
     return render_template('EssayCorrection.html')
 
+@login_required
 @app.route('/Text_simplification')
 def Text_simplification():
     return render_template('Text_simplification.html')
 
+@login_required
 @app.route("/generate_text", methods=["POST"])
 def generate_text():
     try:
