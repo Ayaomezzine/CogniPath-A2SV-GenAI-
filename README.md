@@ -1,32 +1,42 @@
 <h1 align="center" id="title">CogniPath</h1>
+<h2>Home page:</h2>
 
-<p align="center"><img src="https://socialify.git.ci/Azizomezine/CogniPath-A2SV/image?description=1&amp;descriptionEditable=CogniPath%20is%20a%20versatile%20and%20inclusive%20educational%20platform%20%20designed%20to%20support%20students%20of%20all%20backgrounds%20and%20abilities%20in%20their%20%20journey.%20&amp;font=Inter&amp;name=1&amp;pattern=Plus&amp;theme=Light" alt="project-image"></p>
-<h2>Project Screenshots:</h2>
-
-<h3>Login:</h3>
-
-
-
-https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/911d4a02-3ef1-4eef-a223-8ee7d8b5de37
-
-
-
-<h3>The home page:</h3>
 <img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/f61b7e7d-4359-4b73-a9fc-9d9e70f80ca8" alt="project-screenshot" width=auto height="auto">
 
+<h2>🧐 Structure</h2>
 
+Here're some of the project's best features:
+```
+|-- .venv/                                 # Virtual environment folder
+|-- requirements.txt                      # App Dependencies
+|-- run.py                                # Start the app - WSGI gateway
+|
+|-- app/
+|    |
+|    |-- authentication/
+|    |    |
+|    |    |-- static/
+|    |    |    |
+|    |    |    |-- auth/
+|    |    |    |    |-- css/
+|    |    |    |    |-- img/
+|    |    |    |    |-- js/
+|    |    |    |
+|    |    |    |-- front/
+|    |    |    |    |-- css/
+|    |    |    |    |-- img/
+|    |    |    |    |-- js/
+|    |    |    |-- back/
+|    |    |    |    |-- css/
+|    |    |    |    |-- img/
+|    |    |    |    |--js/
+|    |-- templates/                      # Templates used to render pages
+|    |    |
+|    |    |-- *.html                   # All HTML files
+|    |
+|    |-- views.py                       # App views and routes
 
- 
-
-
-https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80254112/46177758-bd72-4f2b-bbac-0271f689cef7
-
-
-
-
-
-
-
+```
 
 <h2>🧐 Features</h2>
 
@@ -64,37 +74,7 @@ pip install -r requirements.txt
 flask run --host=0.0.0.0 --port=5015
 ```
 
-```
-|-- .venv/                                 # Virtual environment folder
-|-- requirements.txt                      # App Dependencies
-|-- run.py                                # Start the app - WSGI gateway
-|
-|-- app/
-|    |
-|    |-- authentication/
-|    |    |
-|    |    |-- static/
-|    |    |    |
-|    |    |    |-- auth/
-|    |    |    |    |-- css/
-|    |    |    |    |-- img/
-|    |    |    |    |-- js/
-|    |    |    |
-|    |    |    |-- front/
-|    |    |    |    |-- css/
-|    |    |    |    |-- img/
-|    |    |    |    |-- js/
-|    |    |    |-- back/
-|    |    |    |    |-- css/
-|    |    |    |    |-- img/
-|    |    |    |    |--js/
-|    |-- templates/                      # Templates used to render pages
-|    |    |
-|    |    |-- *.html                   # All HTML files
-|    |
-|    |-- views.py                       # App views and routes
 
-```
   
 <h2>💻 Built with</h2>
 
