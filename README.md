@@ -2,7 +2,7 @@
 <h2>Welcome to Cognipath – Your Learning Companion for Students with Learning Difficulties!</h2>
 
 
-<p>Cognipath is more than just a website, it's a dedicated learning platform designed to empower students with mental illness like ADHD and ASD. Our mission is to make education accessible, engaging, and tailored to the unique needs of every learner.</p>
+<p>Cognipath is more than just a website, it's a dedicated learning platform designed to empower all the students inluding those with mental illness like ADHD and ASD. Our mission is to make education accessible, engaging, and tailored to the unique needs of every learner.</p>
 
 <img src="https://github.com/Me710/CogniPath-A2SV-GenAI/assets/80206931/f61b7e7d-4359-4b73-a9fc-9d9e70f80ca8" alt="project-screenshot" width=auto height="auto">
 
